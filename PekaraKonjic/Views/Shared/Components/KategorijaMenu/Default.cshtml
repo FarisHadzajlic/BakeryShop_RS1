@@ -1,0 +1,19 @@
+﻿@using PekaraKonjic.Models
+@model IEnumerable<Kategorija>
+
+<li class="nav-item dropdown">
+    <a asp-action="Lista" asp-controller="Proizvod" class="nav-link js-scroll-trigger" data-toggle="dropdown">Proizvodi<b class="caret"></b></a>
+    <ul class="dropdown-menu">
+        @foreach (var kategorija in Model)
+        {
+        <li>
+            <a class="dropdown-item" asp-controller="Proizvod" asp-action="Lista"
+               asp-route-kategorija="@kategorija.Naziv">@kategorija.Naziv</a>
+        </li>
+        }
+        <hr />
+        <li>
+            <a class="dropdown-item" asp-controller="Proizvod" asp-action="Index">Svi proizvodi</a>
+        </li>
+    </ul>
+</li>

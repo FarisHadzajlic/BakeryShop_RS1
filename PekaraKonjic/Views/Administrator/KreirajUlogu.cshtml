@@ -1,0 +1,25 @@
+﻿@using PekaraKonjic.ModelView 
+@model KreirajUloguVM
+
+@{
+    ViewBag.Title = "Kreiraj novu ulogu";
+
+}
+
+<h2>Kreiraj novu ulogu</h2>
+<div class="row">
+    <div class="col-md-12">
+        <form method="post">
+            <h4>Kreirajte novu ulogu.</h4>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NazivUloge">Uloga</label>
+                <input asp-for="NazivUloge" class="form-control" />
+                <span asp-validation-for="NazivUloge" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-secondary form-control">Kreiraj ulogu</button>
+        </form>
+    </div>
+</div>

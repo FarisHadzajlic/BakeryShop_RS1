@@ -1,0 +1,91 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using PekaraKonjic.Models
+
+@inject SignInManager<Kupac> SignInManager
+@inject UserManager<Kupac> UserManager
+
+@{ 
+    var user = UserManager.GetUserId(User);
+}
+
+
+@model PekaraKonjic.Models.Proizvod
+
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+    
+    <link href="~/css/details.css" rel="stylesheet">
+
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <style>
+        .card-inner {
+            margin-left: 4rem;
+        }
+    </style>
+</head>
+<div class="container">
+		<div class="card">
+			<div class="container-fliud">
+				<div class="wrapper row">
+					<div class="preview col-md-6">
+					
+						<ul class=" nav nav-tabs">
+						  <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="@Url.Content(Model.SlikaUrl)" alt="Nema Slike" /></a></li>						  
+						</ul>
+						
+					</div>
+					<div class="details col-md-6">
+						<h3 class="product-title">@Model.Naziv</h3>
+						<div class="rating">
+							<div class="stars">
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+							</div>
+							<span class="review-no">Komentari: @Model.Komentari.Count()</span>
+						</div>
+						<p class="product-description">@Model.Opis</p>
+						<h4 class="price">Cijena: <span>@Model.Cijena KM</span></h4>
+						<p class="vote"><strong>@Model.LikeBrojac</strong> osoba se sviđa ovaj proizvod! <strong>(@Model.LikeBrojac glasova)</strong></p>
+                      				
+						<div class="action">
+							<a class="add-to-cart btn btn-default" asp-action="AddToShoppingCart" asp-controller="Korpa" asp-route-proizvodId="@Model.ProizvodID">Dodaj u korpu</a>
+							<a asp-action="LikeP" asp-controller="Proizvod" asp-route-proizvodId="@Model.ProizvodID" class="like btn btn-default"><span class="fa fa-heart"></span></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<hr />
+<h2 class="text-center">Komentarišite proizvod anonimno</h2>
+
+@foreach (var komentar in Model.Komentari)
+{
+    <partial name="_Komentar" model="komentar" />    
+}
+
+
+<form action="/Proizvod/Komentarisi" id="commentForm" method="post">
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1" style="color:white">Unesite komentar</label>
+        <textarea name="sadrzaj" class="form-control" placeholder="Napišite komentar ..." rows="3"></textarea>
+    </div>
+    <input type="hidden" name="proizvodId" value="@Model.ProizvodID" />
+    <input type="hidden" name="kupacId" value="0" />
+    <button type="submit" class="btn btn-success" id="btnComment">Komentariši</button>
+</form>
+
+<hr />
+
+
+<hr />
+<a asp-action="Index" class="btn btn-outline-success">Nazad</a>

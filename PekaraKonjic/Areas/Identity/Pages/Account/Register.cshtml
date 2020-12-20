@@ -1,0 +1,92 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Registracija";
+}
+
+    <head>
+        <link rel="stylesheet" href="~/css/register.css" type="text/css">
+    </head>
+<body>
+    @*<br />*@
+    @*<header>
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-2" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand js-scroll-trigger" asp-action="Index" asp-controller="Home">Pekara Konjic</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                &nbsp;
+
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                        <partial name="_LoginPartial" />
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" asp-controller="Home" asp-action="Index">Usluge</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" asp-action="Index" asp-controller="Proizvod">Proizvodi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" asp-controller="Home" asp-action="Index">Kontakt</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <br />
+    <br />*@
+    <div class="container" style="background-image: url('https://images.unsplash.com/photo-1523294587484-bae6cc870010?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1464&q=80'); opacity:0.6; color:white")>
+        <article class="card-body mx-auto" style="max-width: 400px;">
+            <h4 class="card-title mt-3 text-center">Registruj se</h4>
+            <p class="text-center">Započnite vašu prvu kupovinu sada!</p>
+            <hr />
+            <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <h4>Kreirajte novi akaunt.</h4>
+                <hr />
+                <div asp-validation-summary="All" style="color:white"></div>
+                <div class="form-group">
+                    <label asp-for="Input.Ime">Ime</label>
+                    <input asp-for="Input.Ime" class="form-control" />
+                    <span asp-validation-for="Input.Ime" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Prezime">Prezime</label>
+                    <input asp-for="Input.Prezime" class="form-control" />
+                    <span asp-validation-for="Input.Prezime" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Adresa">Adresa</label>
+                    <input asp-for="Input.Adresa" class="form-control" />
+                    <span asp-validation-for="Input.Adresa" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.BrojTelefona">Broj telefona</label>
+                    <input asp-for="Input.BrojTelefona" class="form-control" />
+                    <span asp-validation-for="Input.BrojTelefona" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Email">E-mail</label>
+                    <input asp-for="Input.Email" class="form-control" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Password">Lozinka</label>
+                    <input asp-for="Input.Password" class="form-control" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.ConfirmPassword">Potvrdite Lozinku</label>
+                    <input asp-for="Input.ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+                <button style="color:white" type="submit" class="btn btn-secondary form-control">Registruj se</button>
+            </form>
+        </article>
+    </div>
+</body>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

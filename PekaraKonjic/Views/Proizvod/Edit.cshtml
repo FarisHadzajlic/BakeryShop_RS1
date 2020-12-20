@@ -1,0 +1,61 @@
+﻿@model PekaraKonjic.Models.Proizvod
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<h4>Uredi Proizvod</h4>
+<hr />
+
+<div class="row" style="background-color:lightcyan; border-radius:10px; padding:5px">
+    <div class="col-md-4">
+        <hr />
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ProizvodID" />
+            <div class="form-group">
+                <label asp-for="Naziv" class="control-label"></label>
+                <input asp-for="Naziv" class="form-control" />
+                <span asp-validation-for="Naziv" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cijena" class="control-label"></label>
+                <input asp-for="Cijena" class="form-control" />
+                <span asp-validation-for="Cijena" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SlikaUrl" class="control-label"></label>
+                <input asp-for="SlikaUrl" class="form-control" />
+                <span asp-validation-for="SlikaUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Opis" class="control-label"></label>
+                <input asp-for="Opis" class="form-control" />
+                <span asp-validation-for="Opis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="KategorijaId" class="control-label">Kategorija</label>
+                <select asp-for="KategorijaId" class="form-control" asp-items="ViewBag.KategorijaId"></select>
+                <span asp-validation-for="KategorijaId" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="NaStanju" /> @Html.DisplayNameFor(model => model.NaStanju)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Snimi" class="btn btn-primary" /> |
+                <a asp-action="Index" class="btn btn-outline-info">Nazad na listu</a>
+            </div>
+
+        </form>
+        <hr />
+    </div>
+</div>
+<hr />
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

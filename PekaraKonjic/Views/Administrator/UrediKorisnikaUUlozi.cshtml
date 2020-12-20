@@ -1,0 +1,33 @@
+﻿@using PekaraKonjic.ModelView
+@model List<KorisnikUlogaVM>  
+
+
+@{
+    var id = ViewBag.id;
+}
+
+
+<form method="post">
+    <div class="card">
+        <div class="card-header">
+            <h2>Dodaj ili ukloni korisnika sa ove uloge</h2>
+        </div>
+        <div class="card-body">
+            @for(int i = 0;i<Model.Count; i++)
+            {
+            <div class="form-check m-1">
+                <input type="hidden" asp-for="@Model[i].KorisnikId" />
+                <input type="hidden" asp-for="@Model[i].KorisnickoIme" />
+                <input asp-for="@Model[i].Oznacen" class="form-check-input" />
+                <label class="form-check-label" asp-for="@Model[i].Oznacen">
+                    @Model[i].KorisnickoIme
+                </label>
+            </div>
+            }
+        </div>
+        <div class="card-footer">
+            <input type="submit" value="Spremi" class="btn btn-primary" style="width:auto"/>
+            <a asp-action="UrediUlogu" asp-route-id="@id" class="btn btn-primary" style="width:auto">Nazad</a>
+        </div>
+    </div>
+</form>

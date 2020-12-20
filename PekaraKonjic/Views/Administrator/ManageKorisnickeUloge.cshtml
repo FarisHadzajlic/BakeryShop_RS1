@@ -1,0 +1,33 @@
+﻿@model List<KorisnikUlogeVM>
+
+@{
+    var korisnikId = ViewBag.korisnikId;
+}
+
+<form method="post">
+    <div class="card">
+        <div class="card-header">
+            <h2>Upravljaj korisničkim ulogama</h2>
+        </div>
+        <div class="card-body">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <div class="form-check m-1">
+                    <input type="hidden" asp-for="@Model[i].UlogaId" />
+                    <input type="hidden" asp-for="@Model[i].Naziv" />
+                    <input asp-for="@Model[i].Oznacen" class="form-check-input" />
+                    <label class="form-check-label" asp-for="@Model[i].Oznacen">
+                        @Model[i].Naziv
+                    </label>
+                </div>
+            }
+            <div asp-validation-summary="All" class="text-danger"></div>
+        </div>
+        <div class="card-footer">
+            <input type="submit" value="Snimi" class="btn btn-primary"
+                   style="width:auto" />
+            <a asp-action="UrediKorisnika" asp-route-id="@korisnikId"
+               class="btn btn-primary" style="width:auto">Nazad</a>
+        </div>
+    </div>
+</form>

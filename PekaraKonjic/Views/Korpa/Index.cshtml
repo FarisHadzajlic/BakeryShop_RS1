@@ -1,0 +1,44 @@
+﻿@using PekaraKonjic.ModelView
+@model KorpaVM
+
+<h2 style="color:white">Košara</h2>
+<h4 style="color:White">Ovdje su vaši prozovdi.</h4>
+<table class="table table-bordered table-striped" style="color:white">
+    <thead>
+        <tr>
+            <th>Ukloni Proizvod Iz Korpe</th>
+            <th>Kolicina</th>
+            <th>Proizvod</th>
+            <th>Cijena</th>
+            <th>Ukupno</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model.Korpa.KorpaItemi)
+        {
+            <tr>
+                <td><a class="btn btn-danger" style="color:white" asp-action="RemoveFromShoppingCart" asp-route-proizvodId="@line.Proizvod.ProizvodID">Ukloni</a></td>
+                <td class="text-center">@line.Kolicina</td>
+                <td class="text-left">@line.Proizvod.Naziv</td>
+                <td class="text-right">@line.Proizvod.Cijena.ToString("c")</td>
+                <td class="text-right">
+                    @((line.Kolicina * line.Proizvod.Cijena).ToString("c"))
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right"></td>
+            <td class="text-right">
+                @Model.Ukupno.ToString("c")
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+
+<div class="text-center">
+    <a class="btn btn-primary" asp-controller="Narudzba" asp-action="Checkout">Naruči sada!</a>
+</div>
+

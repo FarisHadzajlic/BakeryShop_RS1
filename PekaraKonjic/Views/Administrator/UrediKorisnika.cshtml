@@ -1,0 +1,87 @@
+﻿@model UrediKorisnikaVM
+
+@{ 
+    ViewBag.Title = "Uredi korisnika";
+}
+
+<h2>Uredi korisnika</h2>
+
+<form method="post" class="mt-3">
+    <div class="form-group row">
+        <label asp-for="Id" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Id" disabled class="form-control">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Email" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Email" class="form-control">
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="KorisnickoIme" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="KorisnickoIme" class="form-control">
+            <span asp-validation-for="KorisnickoIme" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">Spremi</button>
+            <a asp-action="ListaKorisnika" class="btn btn-primary">Nazad</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h3>Uloge Korisnika</h3>
+        </div>
+        <div class="card-body">
+            @if (Model.Uloge.Any())
+            {
+                foreach (var uloga in Model.Uloge)
+                {
+                    <h5 class="card-title">@uloga</h5>
+                }
+            }
+            else
+            {
+                <h5 class="card-title">Nema u ovom trenutku</h5>
+            }
+        </div>
+        <div class="card-footer">
+            <a asp-action="ManageKorisnickeUloge" asp-route-id="@Model.Id" style="width:auto" class="btn btn-primary">
+                Upravljaj Ulogama
+            </a>
+        </div>
+    </div>
+
+    @*<div class="card mt-3">
+        <div class="card-header">
+            <h3>Korisnicki Zahtjevi</h3>
+        </div>
+        <div class="card-body">
+            @if (Model.Zahtjevi.Any())
+            {
+                foreach (var zahtjev in Model.Zahtjevi)
+                {
+                    <h5 class="card-title">@zahtjev</h5>
+                }
+            }
+            else
+            {
+                <h5 class="card-title">Nema u ovom momentu</h5>
+            }
+        </div>
+        <div class="card-footer">
+            <a asp-action="ManageKorisnickeZahtjeve" asp-route-id="@Model.Id" style="width:auto" class="btn btn-primary">
+                Upravljaj Zahtjevima
+            </a>
+        </div>
+    </div>*@
+</form>

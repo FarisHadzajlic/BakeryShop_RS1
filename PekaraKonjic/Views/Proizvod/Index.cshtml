@@ -1,0 +1,39 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<Kupac> SignInManager
+@inject UserManager<Kupac> UserManager
+
+@model IEnumerable<PekaraKonjic.Models.Proizvod>
+
+@{ ViewData["Title"] = "Index"; }
+
+<div class="container h-100">
+    <div class="row h-100 align-items-center justify-content-center text-center">
+        @foreach (var item in Model)
+        {
+<div class="col-md-3">
+    <div class="card mb-3 box-shadow">
+        <a asp-controller="Proizvod" asp-action="Details" asp-route-id="@item.ProizvodID">
+            <img class="card-img-top" src="@item.SlikaUrl" alt="Slika proizvoda">
+        </a>
+        <div class="card-body">
+            <h6 class="pull-right">@item.Cijena KM</h6>
+            <h6 class="pull-left">@item.Naziv</h6>
+
+        </div>
+        <div class="btn-group">
+            <a class="btn btn-secondary form-control" asp-action="AddToShoppingCart" asp-controller="Korpa" asp-route-ProizvodId="@item.ProizvodID">Dodaj u korpu</a>
+        </div>
+    </div>
+    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin")) { 
+    <a asp-action="Edit" asp-route-id="@item.ProizvodID" class="btn btn-outline-secondary" style="color:black">Uredi</a>
+    <a asp-action="Delete" asp-route-id="@item.ProizvodID" class="btn btn-outline-danger" style="color:black">Izbrisi</a>
+    }
+
+</div>}
+    </div>
+</div>
+<hr />
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin")) { 
+<a asp-action="Create" class="btn btn-outline-primary form-control">Unesi novi proizvod</a>
+}

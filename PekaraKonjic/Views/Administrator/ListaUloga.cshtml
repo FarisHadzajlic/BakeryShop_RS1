@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model IEnumerable<IdentityRole>
+
+@{
+    ViewBag.Title = "Uloge";
+}
+
+<h2>Sve uloge</h2>
+
+@if (Model.Any())
+{
+    <a class="btn btn-primary" style="width:auto" asp-action="KreirajUlogu" asp-controller="Administrator">Dodaj novu ulogu</a>
+    <hr />
+    foreach (var uloga in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                Uloga ID : @uloga.Id
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@uloga.Name</h5>
+            </div>
+            <div class="card-footer">
+                <form asp-action="IzbrisiUlogu" asp-route-id="@uloga.Id" method="post">
+                <a asp-action="UrediUlogu" asp-controller="Administrator"
+            asp-route-id="@uloga.Id" class="btn btn-primary">Uredi</a>
+              <button type="submit" class="btn btn-danger" 
+                      onclick="return confirm('Da li ste sigurni da želite izbrisati ulogu: @uloga.Name')"> Izbrisi</button>
+                    </form>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            Nema uloga
+        </div>
+        <div class="card-body">
+            Kreirajte nove uloge pristikom na dugme ispod
+        </div>
+        <a class="btn btn-primary" style="width:auto" asp-controller="Administrator" asp-action="KreirajUlogu">Kreiraj Ulogu</a>
+    </div>
+}

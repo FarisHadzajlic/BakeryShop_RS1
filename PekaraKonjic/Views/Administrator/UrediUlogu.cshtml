@@ -1,0 +1,57 @@
+﻿@using PekaraKonjic.ModelView
+@model UrediUloguVM
+
+@{ 
+    ViewBag.Title = "Uredi Ulogu";
+}
+
+<h2>Uredi Ulogu</h2>
+
+<form method="post" class="mt-3" >
+    <div class="form-group row">
+        <label asp-for="Id" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Id" disabled class="form-control" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="NazivUloge" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="NazivUloge" class="form-control" />
+            <span asp-validation-for="NazivUloge" class="text-danger"></span>
+        </div>
+    </div>
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">Izmijeni</button>
+            <a asp-action="ListaUloga" class="btn btn-primary">Nazad</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h3>Korisnici u ovoj ulozi</h3>
+        </div>
+        <div class="card-body">
+            @if (Model.Korisnici.Any())
+            {
+                foreach (var korisnik in Model.Korisnici)
+                {
+                    <h5 class="card-title">@korisnik</h5>
+
+                }
+            }
+            else
+            {
+                <h5 class="card-title">Trenutno nema korisnika</h5>
+            }
+        </div>
+        <div class="card-footer">
+            <a asp-action="UrediKorisnikaUUlozi" asp-controller="Administrator" asp-route-id="@Model.Id" class="btn btn-primary" style="width:auto">Dodaj ili izbrisi korisnika</a>
+        </div>
+    </div>
+
+
+</form>
